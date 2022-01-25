@@ -43,19 +43,6 @@ class WebViewManager {
 			<h3>hello world</h3>
 		</html>`;
 		this._panel.onDidDispose(() => this.dispose(), null, this._disposables);
-
-		// Handle messages from the webview
-		this._panel.webview.onDidReceiveMessage(
-			(message) => {
-				switch (message.command) {
-					case 'alert':
-						vscode.window.showErrorMessage(message.text);
-						return;
-				}
-			},
-			null,
-			this._disposables
-		);
 	}
 
 	public dispose() {
