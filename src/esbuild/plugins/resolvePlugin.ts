@@ -8,12 +8,14 @@ const resolverPlugin: PluginFactoryType = () => {
 	return {
 		name: 'custom-resolver-plugin',
 		setup(build: esbuild.PluginBuild) {
+			build.onResolve({ filter: /^EntryUniqueFileName\.js$/ }, () => {
+				return {
+					path: 'EntryUniqueFileName.js',
+				};
+			});
+
 			build.onResolve({ filter: /.*/ }, (args: esbuild.OnResolveArgs) => {
-				if (
-					args.path.startsWith('./') ||
-					args.path.startsWith('../') ||
-					args.kind === 'entry-point'
-				) {
+				if (args.path.startsWith('./') || args.path.startsWith('../')) {
 					if (
 						args.importer.startsWith('https://') ||
 						args.importer.startsWith('http://')
@@ -24,6 +26,7 @@ const resolverPlugin: PluginFactoryType = () => {
 						};
 					}
 
+					/**@todo modify this part to retrieve module content */
 					return {
 						path: path.join(
 							args.resolveDir,
@@ -32,12 +35,10 @@ const resolverPlugin: PluginFactoryType = () => {
 						namespace: 'file',
 					};
 				}
-				if (!builtins.includes(args.path)) {
-					return {
-						namespace: 'unpkg',
-						path: `https://unpkg.com/${args.path}`,
-					};
-				}
+				return {
+					namespace: 'unpkg',
+					path: `https://unpkg.com/${args.path}`,
+				};
 			});
 		},
 	};

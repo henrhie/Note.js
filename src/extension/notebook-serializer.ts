@@ -1,7 +1,7 @@
 import * as vscode from 'vscode';
 import { TextEncoder, TextDecoder } from 'util';
 
-interface RawNotebookData {
+export interface RawNotebookData {
 	cells: RawNotebookCell[];
 }
 
@@ -9,10 +9,11 @@ interface RawNotebookCell {
 	language: string;
 	value: string;
 	kind: vscode.NotebookCellKind;
+	index: number;
 	editable?: boolean;
 }
 
-export class Serializer implements vscode.NotebookSerializer {
+class Serializer implements vscode.NotebookSerializer {
 	public readonly label: string = 'My Sample Content Serializer';
 
 	public async deserializeNotebook(
@@ -33,6 +34,7 @@ export class Serializer implements vscode.NotebookSerializer {
 				new vscode.NotebookCellData(item.kind, item.value, item.language)
 		);
 
+		this.globalDataState = raw;
 		return new vscode.NotebookData(cells);
 	}
 
@@ -42,14 +44,27 @@ export class Serializer implements vscode.NotebookSerializer {
 	): Promise<Uint8Array> {
 		let contents: RawNotebookData = { cells: [] };
 
-		for (const cell of data.cells) {
+		for (const [index, cell] of data.cells.entries()) {
 			contents.cells.push({
 				kind: cell.kind,
 				language: cell.languageId,
 				value: cell.value,
+				index,
 			});
 		}
 
+		this.globalDataState = contents;
+
 		return new TextEncoder().encode(JSON.stringify(contents));
 	}
+
+	public getGlobalDataState() {
+		return this.globalDataState;
+	}
+
+	private globalDataState: RawNotebookData = {} as RawNotebookData;
 }
+
+const serializer = new Serializer();
+
+export { serializer };
