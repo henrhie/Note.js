@@ -1,17 +1,18 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.deactivate = exports.activate = void 0;
-// The module 'vscode' contains the VS Code extensibility API
-// Import the module and reference it with the alias vscode in your code below
 const vscode = require("vscode");
-const sampleProvider_1 = require("./sampleProvider");
-// This method is called when your extension is activated
-// your extension is activated the very first time the command is executed
+const webview_1 = require("./webview");
+const serializer_1 = require("./serializer");
 function activate(context) {
-    context.subscriptions.push(vscode.workspace.registerNotebookSerializer('test-notebook-renderer', new sampleProvider_1.SampleContentSerializer(), { transientOutputs: true }), new sampleProvider_1.SampleKernel());
+    context.subscriptions.push(vscode.workspace.registerNotebookSerializer('notebook', new serializer_1.Serializer(), {
+        transientOutputs: false,
+    }));
+    context.subscriptions.push(vscode.commands.registerCommand('show webview', () => {
+        webview_1.WebViewManager.createOrShow(context.extensionUri);
+    }));
 }
 exports.activate = activate;
-// This method is called when your extension is deactivated
 function deactivate() { }
 exports.deactivate = deactivate;
 //# sourceMappingURL=extension.js.map

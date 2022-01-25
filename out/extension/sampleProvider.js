@@ -1,42 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.SampleKernel = exports.SampleContentSerializer = void 0;
+exports.SampleKernel = void 0;
 const vscode = require("vscode");
-const util_1 = require("util");
-class SampleContentSerializer {
-    constructor() {
-        this.label = 'My Sample Content Serializer';
-    }
-    async deserializeNotebook(data, token) {
-        var contents = new util_1.TextDecoder().decode(data); // convert to String to make JSON object
-        // Read file contents
-        let raw;
-        try {
-            raw = JSON.parse(contents);
-        }
-        catch {
-            raw = { cells: [] };
-        }
-        // Create array of Notebook cells for the VS Code API from file contents
-        const cells = raw.cells.map((item) => new vscode.NotebookCellData(item.kind, item.value, item.language));
-        // Pass read and formatted Notebook Data to VS Code to display Notebook with saved cells
-        return new vscode.NotebookData(cells);
-    }
-    async serializeNotebook(data, token) {
-        // Map the Notebook data into the format we want to save the Notebook data as
-        let contents = { cells: [] };
-        for (const cell of data.cells) {
-            contents.cells.push({
-                kind: cell.kind,
-                language: cell.languageId,
-                value: cell.value,
-            });
-        }
-        // Give a string of all the data to save and VS Code will handle the rest
-        return new util_1.TextEncoder().encode(JSON.stringify(contents));
-    }
-}
-exports.SampleContentSerializer = SampleContentSerializer;
 class SampleKernel {
     constructor() {
         this.id = 'test-notebook-renderer-kernel';
