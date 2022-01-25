@@ -6,7 +6,7 @@ const util_1 = require("util");
 class Serializer {
     constructor() {
         this.label = 'My Sample Content Serializer';
-        this.globalDataState = {};
+        this.mapModuleNameToModule = {};
     }
     async deserializeNotebook(data, token) {
         var contents = new util_1.TextDecoder().decode(data);
@@ -17,12 +17,19 @@ class Serializer {
         catch {
             raw = { cells: [] };
         }
-        const cells = raw.cells.map((item) => new vscode.NotebookCellData(item.kind, item.value, item.language));
-        this.globalDataState = raw;
+        let moduleName;
+        const cells = raw.cells.map((item) => {
+            moduleName = item.value.match(/\/\/.+?\/\//);
+            if (moduleName) {
+                this.mapModuleNameToModule[moduleName[0].replace('//', '').replace('//', '')] = item.value.replace(moduleName[0], '');
+            }
+            return new vscode.NotebookCellData(item.kind, item.value, item.language);
+        });
         return new vscode.NotebookData(cells);
     }
     async serializeNotebook(data, token) {
         let contents = { cells: [] };
+        let moduleName;
         for (const [index, cell] of data.cells.entries()) {
             contents.cells.push({
                 kind: cell.kind,
@@ -30,12 +37,15 @@ class Serializer {
                 value: cell.value,
                 index,
             });
+            moduleName = cell.value.match(/\/\/.+?\/\//);
+            if (moduleName) {
+                this.mapModuleNameToModule[moduleName[0].replace('//', '').replace('//', '')] = cell.value.replace(moduleName[0], '');
+            }
         }
-        this.globalDataState = contents;
         return new util_1.TextEncoder().encode(JSON.stringify(contents));
     }
-    getGlobalDataState() {
-        return this.globalDataState;
+    getMapModuleNameToModule() {
+        return this.mapModuleNameToModule;
     }
 }
 const serializer = new Serializer();

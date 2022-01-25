@@ -81,6 +81,7 @@
 		"webpack-cli": "^4.7.0"
 	},
 	"dependencies": {
+		"axios": "^0.25.0",
 		"esbuild": "^0.14.13"
 	}
 }

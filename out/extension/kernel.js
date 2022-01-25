@@ -2,6 +2,8 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Kernel = void 0;
 const vscode = require("vscode");
+const notebook_serializer_1 = require("./notebook-serializer");
+const build_1 = require("./esbuild/build");
 class Kernel {
     constructor() {
         this.id = 'notebook';
@@ -23,13 +25,13 @@ class Kernel {
     }
     async _doExecution(cell) {
         const execution = this.controller.createNotebookCellExecution(cell);
-        const text = cell.document.getText();
         execution.executionOrder = ++this.executionOrder;
         execution.start(Date.now());
+        const code = await build_1.bundleCode(cell.document.getText(), notebook_serializer_1.serializer.getMapModuleNameToModule());
         try {
             execution.replaceOutput([
                 new vscode.NotebookCellOutput([
-                    vscode.NotebookCellOutputItem.text('Dummy output text!'),
+                    vscode.NotebookCellOutputItem.text('Dummy output text!========> ', code.outputFiles && code.outputFiles[0].text),
                 ]),
             ]);
             execution.end(true, Date.now());

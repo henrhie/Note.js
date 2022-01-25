@@ -1,5 +1,6 @@
 import * as vscode from 'vscode';
 import { serializer } from './notebook-serializer';
+import { bundleCode } from './esbuild/build';
 
 export class Kernel {
 	readonly id = 'notebook';
@@ -38,15 +39,21 @@ export class Kernel {
 	private async _doExecution(cell: vscode.NotebookCell): Promise<void> {
 		const execution = this.controller.createNotebookCellExecution(cell);
 
-		const text = cell.document.getText();
-
 		execution.executionOrder = ++this.executionOrder;
 		execution.start(Date.now());
+
+		const code = await bundleCode(
+			cell.document.getText(),
+			serializer.getMapModuleNameToModule()
+		);
 
 		try {
 			execution.replaceOutput([
 				new vscode.NotebookCellOutput([
-					vscode.NotebookCellOutputItem.text('Dummy output text!'),
+					vscode.NotebookCellOutputItem.text(
+						'Dummy output text!========> ',
+						code.outputFiles && code.outputFiles[0].text
+					),
 				]),
 			]);
 			execution.end(true, Date.now());

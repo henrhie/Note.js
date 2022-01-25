@@ -28,13 +28,17 @@ class Serializer implements vscode.NotebookSerializer {
 		} catch {
 			raw = { cells: [] };
 		}
+		let moduleName: RegExpMatchArray | null;
+		const cells = raw.cells.map((item) => {
+			moduleName = item.value.match(/\/\/.+?\/\//);
+			if (moduleName) {
+				this.mapModuleNameToModule[
+					moduleName[0].replace('//', '').replace('//', '')
+				] = item.value.replace(moduleName[0], '');
+			}
+			return new vscode.NotebookCellData(item.kind, item.value, item.language);
+		});
 
-		const cells = raw.cells.map(
-			(item) =>
-				new vscode.NotebookCellData(item.kind, item.value, item.language)
-		);
-
-		this.globalDataState = raw;
 		return new vscode.NotebookData(cells);
 	}
 
@@ -43,6 +47,7 @@ class Serializer implements vscode.NotebookSerializer {
 		token: vscode.CancellationToken
 	): Promise<Uint8Array> {
 		let contents: RawNotebookData = { cells: [] };
+		let moduleName: RegExpMatchArray | null;
 
 		for (const [index, cell] of data.cells.entries()) {
 			contents.cells.push({
@@ -51,18 +56,23 @@ class Serializer implements vscode.NotebookSerializer {
 				value: cell.value,
 				index,
 			});
-		}
 
-		this.globalDataState = contents;
+			moduleName = cell.value.match(/\/\/.+?\/\//);
+			if (moduleName) {
+				this.mapModuleNameToModule[
+					moduleName[0].replace('//', '').replace('//', '')
+				] = cell.value.replace(moduleName[0], '');
+			}
+		}
 
 		return new TextEncoder().encode(JSON.stringify(contents));
 	}
 
-	public getGlobalDataState() {
-		return this.globalDataState;
+	public getMapModuleNameToModule() {
+		return this.mapModuleNameToModule;
 	}
 
-	private globalDataState: RawNotebookData = {} as RawNotebookData;
+	private mapModuleNameToModule: { [key: string]: string } = {};
 }
 
 const serializer = new Serializer();

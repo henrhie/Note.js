@@ -1,10 +1,10 @@
 import * as esbuild from 'esbuild';
-import path from 'path';
-const builtins = require('module').builtinModules as string[];
+import * as path from 'path';
+import { URL } from 'url';
 
 type PluginFactoryType = () => esbuild.Plugin;
 
-const resolverPlugin: PluginFactoryType = () => {
+export const resolverPlugin: PluginFactoryType = () => {
 	return {
 		name: 'custom-resolver-plugin',
 		setup(build: esbuild.PluginBuild) {
@@ -28,11 +28,8 @@ const resolverPlugin: PluginFactoryType = () => {
 
 					/**@todo modify this part to retrieve module content */
 					return {
-						path: path.join(
-							args.resolveDir,
-							args.path + (!args.path.endsWith('.js') ? '.js' : '')
-						),
-						namespace: 'file',
+						path: args.path,
+						namespace: 'cell_module',
 					};
 				}
 				return {
