@@ -14,6 +14,11 @@ export const bundleCode = async (
 		platform: 'browser',
 		write: false,
 		plugins: [resolverPlugin(), loaderPlugin(entryCellValue, codeCells)],
+		define: {
+			// eslint-disable-next-line @typescript-eslint/naming-convention
+			'process.env.NODE_ENV': '"production"',
+			global: 'window',
+		},
 	});
 
 	return buildResult;

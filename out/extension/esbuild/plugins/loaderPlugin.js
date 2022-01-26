@@ -14,6 +14,7 @@ const loaderPlugin = (entryCellValue, cells) => {
             });
             /**@todo test fetching on local laptop... does not on company machine due to network restrictions */
             build.onLoad({ filter: /^https?:\/\//, namespace: 'unpkg' }, async (args) => {
+                // console.log('args in onload: ', args);
                 const { data } = await axios_1.default.get(args.path);
                 const chunk = {
                     loader: 'jsx',

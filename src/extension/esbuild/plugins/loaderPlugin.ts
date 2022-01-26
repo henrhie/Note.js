@@ -22,6 +22,7 @@ export const loaderPlugin: PluginFactoryType = (entryCellValue, cells) => {
 			build.onLoad(
 				{ filter: /^https?:\/\//, namespace: 'unpkg' },
 				async (args) => {
+					// console.log('args in onload: ', args);
 					const { data } = await axios.get<string>(args.path);
 					const chunk: esbuild.OnLoadResult = {
 						loader: 'jsx',
