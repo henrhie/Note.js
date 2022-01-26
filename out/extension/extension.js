@@ -5,6 +5,7 @@ const vscode = require("vscode");
 const webview_1 = require("./webview");
 const kernel_1 = require("./kernel");
 const notebook_serializer_1 = require("./notebook-serializer");
+process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
 function activate(context) {
     context.subscriptions.push(vscode.workspace.registerNotebookSerializer('notebook', notebook_serializer_1.serializer, {
         transientOutputs: false,

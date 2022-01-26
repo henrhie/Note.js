@@ -8,7 +8,12 @@ exports.html = `
       <meta charset="UTF-8"/>
       <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
       <title>Code Sandbox</title>
-      <style>html {background-color: white;}</style>
+      <style>
+        body {background-color: white;}
+        .vscode-light { color: black }
+        .vscode-dark { color: black }
+        .vscode-high-contrast { color: black }
+      </style>
     </head>
     <body>
      <div id="root"></div> 
