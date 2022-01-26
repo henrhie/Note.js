@@ -4,6 +4,7 @@ exports.Kernel = void 0;
 const vscode = require("vscode");
 const notebook_serializer_1 = require("./notebook-serializer");
 const build_1 = require("./esbuild/build");
+const webview_1 = require("./webview");
 class Kernel {
     constructor() {
         this.id = 'notebook';
@@ -28,14 +29,19 @@ class Kernel {
         execution.executionOrder = ++this.executionOrder;
         execution.start(Date.now());
         try {
+            let displayText;
             const code = await build_1.bundleCode(cell.document.getText(), notebook_serializer_1.serializer.getMapModuleNameToModule());
             const outputText = code.outputFiles && code.outputFiles[0].text;
-            execution.replaceOutput([
-                new vscode.NotebookCellOutput([
-                    vscode.NotebookCellOutputItem.text(outputText),
-                ]),
-            ]);
-            execution.end(true, Date.now());
+            webview_1.WebViewManager.postMessageToWebiew(outputText);
+            webview_1.WebViewManager.webViewContextOnMessage((message) => {
+                const consoleLogs = message.output.join('\n');
+                execution.replaceOutput([
+                    new vscode.NotebookCellOutput([
+                        vscode.NotebookCellOutputItem.text(consoleLogs),
+                    ]),
+                ]);
+                execution.end(true, Date.now());
+            });
         }
         catch (err) {
             execution.replaceOutput([

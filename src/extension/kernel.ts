@@ -1,6 +1,7 @@
 import * as vscode from 'vscode';
 import { serializer } from './notebook-serializer';
 import { bundleCode } from './esbuild/build';
+import { WebViewManager } from './webview';
 
 export class Kernel {
 	readonly id = 'notebook';
@@ -43,17 +44,22 @@ export class Kernel {
 		execution.start(Date.now());
 
 		try {
+			let displayText: string;
 			const code = await bundleCode(
 				cell.document.getText(),
 				serializer.getMapModuleNameToModule()
 			);
 			const outputText = code.outputFiles && code.outputFiles[0].text;
-			execution.replaceOutput([
-				new vscode.NotebookCellOutput([
-					vscode.NotebookCellOutputItem.text(outputText),
-				]),
-			]);
-			execution.end(true, Date.now());
+			WebViewManager.postMessageToWebiew(outputText);
+			WebViewManager.webViewContextOnMessage((message: { output: [] }) => {
+				const consoleLogs = message.output.join('\n');
+				execution.replaceOutput([
+					new vscode.NotebookCellOutput([
+						vscode.NotebookCellOutputItem.text(consoleLogs),
+					]),
+				]);
+				execution.end(true, Date.now());
+			});
 		} catch (err: any) {
 			execution.replaceOutput([
 				new vscode.NotebookCellOutput([

@@ -1,4 +1,5 @@
 import * as vscode from 'vscode';
+import { html } from './html';
 
 class WebViewManager {
 	/**
@@ -25,7 +26,8 @@ class WebViewManager {
 		const panel = vscode.window.createWebviewPanel(
 			WebViewManager.viewType,
 			'View Session',
-			column || vscode.ViewColumn.Two
+			column || vscode.ViewColumn.Two,
+			{ enableScripts: true }
 		);
 
 		WebViewManager.currentPanel = new WebViewManager(panel, extensionUri);
@@ -35,13 +37,23 @@ class WebViewManager {
 		WebViewManager.currentPanel = new WebViewManager(panel, extensionUri);
 	}
 
+	public static postMessageToWebiew(message: any) {
+		WebViewManager.currentPanel?._panel.webview.postMessage(message);
+	}
+
+	public static webViewContextOnMessage(callback: Function) {
+		WebViewManager.currentPanel?._panel.webview.onDidReceiveMessage(
+			(message: any) => {
+				callback(message);
+			}
+		);
+	}
+
 	private constructor(panel: vscode.WebviewPanel, extensionUri: vscode.Uri) {
 		this._panel = panel;
 		this._extensionUri = extensionUri;
 
-		this._panel.webview.html = `<html>
-			<h3>hello world</h3>
-		</html>`;
+		this._panel.webview.html = html;
 		this._panel.onDidDispose(() => this.dispose(), null, this._disposables);
 	}
 
