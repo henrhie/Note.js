@@ -1,5 +1,4 @@
 import * as esbuild from 'esbuild';
-import * as path from 'path';
 import { URL } from 'url';
 
 type PluginFactoryType = () => esbuild.Plugin;
@@ -8,9 +7,10 @@ export const resolverPlugin: PluginFactoryType = () => {
 	return {
 		name: 'custom-resolver-plugin',
 		setup(build: esbuild.PluginBuild) {
-			build.onResolve({ filter: /^EntryUniqueFileName\.js$/ }, () => {
+			build.onResolve({ filter: /^index\.js$/ }, () => {
 				return {
-					path: 'EntryUniqueFileName.js',
+					path: 'index.js',
+					namespace: 'a',
 				};
 			});
 
@@ -26,7 +26,6 @@ export const resolverPlugin: PluginFactoryType = () => {
 						};
 					}
 
-					/**@todo modify this part to retrieve module content */
 					return {
 						path: args.path,
 						namespace: 'cell_module',
@@ -40,5 +39,3 @@ export const resolverPlugin: PluginFactoryType = () => {
 		},
 	};
 };
-
-export default resolverPlugin;

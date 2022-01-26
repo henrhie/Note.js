@@ -27,11 +27,12 @@ class Kernel {
         const execution = this.controller.createNotebookCellExecution(cell);
         execution.executionOrder = ++this.executionOrder;
         execution.start(Date.now());
-        const code = await build_1.bundleCode(cell.document.getText(), notebook_serializer_1.serializer.getMapModuleNameToModule());
         try {
+            const code = await build_1.bundleCode(cell.document.getText(), notebook_serializer_1.serializer.getMapModuleNameToModule());
+            const outputText = code.outputFiles && code.outputFiles[0].text;
             execution.replaceOutput([
                 new vscode.NotebookCellOutput([
-                    vscode.NotebookCellOutputItem.text('Dummy output text!========> ', code.outputFiles && code.outputFiles[0].text),
+                    vscode.NotebookCellOutputItem.text(outputText),
                 ]),
             ]);
             execution.end(true, Date.now());

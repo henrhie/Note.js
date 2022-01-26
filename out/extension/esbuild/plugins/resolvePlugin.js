@@ -6,9 +6,10 @@ const resolverPlugin = () => {
     return {
         name: 'custom-resolver-plugin',
         setup(build) {
-            build.onResolve({ filter: /^EntryUniqueFileName\.js$/ }, () => {
+            build.onResolve({ filter: /^index\.js$/ }, () => {
                 return {
-                    path: 'EntryUniqueFileName.js',
+                    path: 'index.js',
+                    namespace: 'a',
                 };
             });
             build.onResolve({ filter: /.*/ }, (args) => {
@@ -20,7 +21,6 @@ const resolverPlugin = () => {
                             path: new url_1.URL(args.path, args.importer + '/').toString(),
                         };
                     }
-                    /**@todo modify this part to retrieve module content */
                     return {
                         path: args.path,
                         namespace: 'cell_module',
@@ -35,5 +35,4 @@ const resolverPlugin = () => {
     };
 };
 exports.resolverPlugin = resolverPlugin;
-exports.default = exports.resolverPlugin;
 //# sourceMappingURL=resolvePlugin.js.map

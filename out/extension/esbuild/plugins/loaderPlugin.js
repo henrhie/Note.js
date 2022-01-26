@@ -6,27 +6,15 @@ const loaderPlugin = (entryCellValue, cells) => {
     return {
         name: 'custom-loader-plugin',
         setup(build) {
-            // build.onLoad({ filter: /.*/, namespace: 'unpkg' }, async (args) => {
-            // 	const paths = new URL(args.path).pathname.split('/');
-            // 	const filename = new URL(args.path).pathname.split('/')[
-            // 		paths.length - 1
-            // 	];
-            // 	const cachedResult = await cache.retrieveFile(filename);
-            // 	if (cachedResult) {
-            // 		return {
-            // 			contents: cachedResult,
-            // 		};
-            // 	}
-            // });
-            build.onLoad({ filter: /^EntryUniqueFileName\.js$/ }, () => {
+            build.onLoad({ filter: /^index\.js$/ }, () => {
                 return {
                     loader: 'jsx',
                     contents: entryCellValue,
                 };
             });
+            /**@todo test fetching on local laptop... does not on company machine due to network restrictions */
             build.onLoad({ filter: /^https?:\/\//, namespace: 'unpkg' }, async (args) => {
                 const { data } = await axios_1.default.get(args.path);
-                // await cache.writeFile(data, request.path);
                 const chunk = {
                     loader: 'jsx',
                     contents: data,
@@ -34,7 +22,7 @@ const loaderPlugin = (entryCellValue, cells) => {
                 return chunk;
             });
             build.onLoad({ filter: /.*/, namespace: 'cell_module' }, async (args) => {
-                const contents = cells[args.path];
+                const contents = cells[args.path.substring(2)];
                 const chunk = {
                     loader: 'jsx',
                     contents,
@@ -45,5 +33,4 @@ const loaderPlugin = (entryCellValue, cells) => {
     };
 };
 exports.loaderPlugin = loaderPlugin;
-exports.default = exports.loaderPlugin;
 //# sourceMappingURL=loaderPlugin.js.map

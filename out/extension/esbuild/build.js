@@ -6,10 +6,10 @@ const resolvePlugin_1 = require("./plugins/resolvePlugin");
 const loaderPlugin_1 = require("./plugins/loaderPlugin");
 const bundleCode = async (entryCellValue, codeCells) => {
     const buildResult = await esbuild.build({
-        entryPoints: ['EntryUniqueFileName.js'],
-        outfile: 'output.js',
+        entryPoints: ['index.js'],
         bundle: true,
         platform: 'browser',
+        write: false,
         plugins: [resolvePlugin_1.resolverPlugin(), loaderPlugin_1.loaderPlugin(entryCellValue, codeCells)],
     });
     return buildResult;

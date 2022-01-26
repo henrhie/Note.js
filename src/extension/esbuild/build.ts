@@ -9,10 +9,10 @@ export const bundleCode = async (
 	codeCells: ModuleNameToModuleType
 ) => {
 	const buildResult = await esbuild.build({
-		entryPoints: ['EntryUniqueFileName.js'],
-		outfile: 'output.js',
+		entryPoints: ['index.js'],
 		bundle: true,
 		platform: 'browser',
+		write: false,
 		plugins: [resolverPlugin(), loaderPlugin(entryCellValue, codeCells)],
 	});
 

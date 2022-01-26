@@ -42,18 +42,15 @@ export class Kernel {
 		execution.executionOrder = ++this.executionOrder;
 		execution.start(Date.now());
 
-		const code = await bundleCode(
-			cell.document.getText(),
-			serializer.getMapModuleNameToModule()
-		);
-
 		try {
+			const code = await bundleCode(
+				cell.document.getText(),
+				serializer.getMapModuleNameToModule()
+			);
+			const outputText = code.outputFiles && code.outputFiles[0].text;
 			execution.replaceOutput([
 				new vscode.NotebookCellOutput([
-					vscode.NotebookCellOutputItem.text(
-						'Dummy output text!========> ',
-						code.outputFiles && code.outputFiles[0].text
-					),
+					vscode.NotebookCellOutputItem.text(outputText),
 				]),
 			]);
 			execution.end(true, Date.now());
