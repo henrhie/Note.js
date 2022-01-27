@@ -1,5 +1,6 @@
 import * as esbuild from 'esbuild';
 import axios from 'axios';
+import { cache } from '../../cache';
 
 type MapModuleNametoModule = { [key: string]: string };
 type PluginFactoryType = (
@@ -18,12 +19,26 @@ export const loaderPlugin: PluginFactoryType = (entryCellValue, cells) => {
 				};
 			});
 
-			/**@todo test fetching on local laptop... does not on company machine due to network restrictions */
+			build.onLoad({ filter: /.*/ }, async (args) => {
+				const paths = new URL(args.path).pathname.split('/');
+				const filename = new URL(args.path).pathname.split('/')[
+					paths.length - 1
+				];
+				const cacheData = cache.getModuleData(filename);
+
+				if (cacheData) {
+					return {
+						contents: cacheData,
+						loader: 'jsx',
+					};
+				}
+			});
+
 			build.onLoad(
 				{ filter: /^https?:\/\//, namespace: 'unpkg' },
 				async (args) => {
-					// console.log('args in onload: ', args);
-					const { data } = await axios.get<string>(args.path);
+					const { data, request } = await axios.get<string>(args.path);
+					cache.setModuleData(data, request.path);
 					const chunk: esbuild.OnLoadResult = {
 						loader: 'jsx',
 						contents: data,
