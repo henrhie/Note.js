@@ -31,6 +31,12 @@ export const resolverPlugin: PluginFactoryType = () => {
 						namespace: 'cell_module',
 					};
 				}
+				if (args.path.endsWith('.css')) {
+					return {
+						namespace: 'unpkg-css',
+						path: `https://unpkg.com/${args.path}`,
+					};
+				}
 				return {
 					namespace: 'unpkg',
 					path: `https://unpkg.com/${args.path}`,
