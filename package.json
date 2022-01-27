@@ -82,6 +82,7 @@
 	},
 	"dependencies": {
 		"axios": "^0.25.0",
-		"esbuild": "^0.14.13"
+		"esbuild": "^0.14.13",
+		"node-cache": "^5.1.2"
 	}
 }
