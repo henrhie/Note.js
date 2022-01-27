@@ -53,6 +53,15 @@ const loaderPlugin = (entryCellValue, cells) => {
                 return result;
             });
             build.onLoad({ filter: /.css$/, namespace: 'unpkg-css' }, async (args) => {
+                const paths = new URL(args.path).pathname.split('/');
+                const filename = new URL(args.path).pathname.split('/')[paths.length - 1];
+                const cacheData = cache_1.cache.getModuleData(filename.replace(/.css$/, ''));
+                if (cacheData) {
+                    return {
+                        contents: cacheData,
+                        loader: 'jsx',
+                    };
+                }
                 const { data, request } = await axios_1.default.get(args.path.replace(/.css$/, ''));
                 const escaped = data
                     .replace(/\n/g, '')
@@ -67,7 +76,7 @@ const loaderPlugin = (entryCellValue, cells) => {
                     loader: 'jsx',
                     contents,
                 };
-                cache_1.cache.setModuleData(data, request.path);
+                cache_1.cache.setModuleData(contents, request.path);
                 return result;
             });
             build.onLoad({ filter: /.*/, namespace: 'cell_module' }, async (args) => {

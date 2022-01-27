@@ -1,5 +1,5 @@
 import * as vscode from 'vscode';
-import { html } from './html';
+import { html } from './webview-internal/html';
 
 class WebViewManager {
 	/**

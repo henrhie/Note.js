@@ -24,20 +24,12 @@ export const loaderPlugin: PluginFactoryType = (entryCellValue, cells) => {
 				const filename = new URL(args.path).pathname.split('/')[
 					paths.length - 1
 				];
-<<<<<<< HEAD
-				console.log('cache module name: ', args);
-				const cachedModule = cache.get<string>(filename);
-				if (cachedModule) {
-					return {
-						contents: cachedModule,
-=======
 				const cacheData = cache.getModuleData(filename);
 
 				if (cacheData) {
 					return {
 						contents: cacheData,
 						loader: 'jsx',
->>>>>>> 23fa637fe4fd65258da22197c15b0e3c1d1e6e67
 					};
 				}
 			});
@@ -46,12 +38,7 @@ export const loaderPlugin: PluginFactoryType = (entryCellValue, cells) => {
 				{ filter: /^https?:\/\//, namespace: 'unpkg' },
 				async (args) => {
 					const { data, request } = await axios.get<string>(args.path);
-<<<<<<< HEAD
-					console.log('request.path: ===>', request.path);
-					cache.set<string>(request.path, data);
-=======
 					cache.setModuleData(data, request.path);
->>>>>>> 23fa637fe4fd65258da22197c15b0e3c1d1e6e67
 					const chunk: esbuild.OnLoadResult = {
 						loader: 'jsx',
 						contents: data,
@@ -89,6 +76,18 @@ export const loaderPlugin: PluginFactoryType = (entryCellValue, cells) => {
 			build.onLoad(
 				{ filter: /.css$/, namespace: 'unpkg-css' },
 				async (args: esbuild.OnLoadArgs) => {
+					const paths = new URL(args.path).pathname.split('/');
+					const filename = new URL(args.path).pathname.split('/')[
+						paths.length - 1
+					];
+					const cacheData = cache.getModuleData(filename.replace(/.css$/, ''));
+
+					if (cacheData) {
+						return {
+							contents: cacheData,
+							loader: 'jsx',
+						};
+					}
 					const { data, request } = await axios.get<string>(
 						args.path.replace(/.css$/, '')
 					);
@@ -109,7 +108,7 @@ export const loaderPlugin: PluginFactoryType = (entryCellValue, cells) => {
 						contents,
 					};
 
-					cache.setModuleData(data, request.path);
+					cache.setModuleData(contents, request.path);
 					return result;
 				}
 			);
