@@ -28,6 +28,9 @@ class Kernel {
         const execution = this.controller.createNotebookCellExecution(cell);
         execution.executionOrder = ++this.executionOrder;
         execution.start(Date.now());
+        execution.token.onCancellationRequested((e) => {
+            execution.end(undefined, Date.now());
+        });
         try {
             const code = await build_1.bundleCode(cell.document.getText(), notebook_serializer_1.serializer.getMapModuleNameToModule());
             const outputText = code.outputFiles && code.outputFiles[0].text;
