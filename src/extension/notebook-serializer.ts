@@ -14,7 +14,7 @@ interface RawNotebookCell {
 }
 
 class Serializer implements vscode.NotebookSerializer {
-	public readonly label: string = 'My Sample Content Serializer';
+	public readonly label: string = 'Serializer';
 
 	public async deserializeNotebook(
 		data: Uint8Array,
@@ -30,10 +30,15 @@ class Serializer implements vscode.NotebookSerializer {
 		}
 		let moduleName: RegExpMatchArray | null;
 		const cells = raw.cells.map((item) => {
-			moduleName = item.value.match(/\/\/.+?\/\//);
+			moduleName =
+				item.value.match(/\/\/.+?\/\//) || item.value.match(/\/\*.+?\//);
 			if (moduleName) {
 				this.mapModuleNameToModule[
-					moduleName[0].replace('//', '').replace('//', '')
+					moduleName[0]
+						.replace(/\/\//g, '')
+						.replace('/*', '')
+						.replace('*/', '')
+						.trim()
 				] = item.value.replace(moduleName[0], '');
 			}
 			return new vscode.NotebookCellData(item.kind, item.value, item.language);
@@ -57,10 +62,15 @@ class Serializer implements vscode.NotebookSerializer {
 				index,
 			});
 
-			moduleName = cell.value.match(/\/\/.+?\/\//);
+			moduleName =
+				cell.value.match(/\/\/.+?\/\//) || cell.value.match(/\/\*.+?\//);
 			if (moduleName) {
 				this.mapModuleNameToModule[
-					moduleName[0].replace('//', '').replace('//', '')
+					moduleName[0]
+						.replace(/\/\//g, '')
+						.replace('/*', '')
+						.replace('*/', '')
+						.trim()
 				] = cell.value.replace(moduleName[0], '');
 			}
 		}

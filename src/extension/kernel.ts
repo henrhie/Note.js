@@ -6,7 +6,7 @@ import { WebViewManager } from './webview';
 export class Kernel {
 	readonly id = 'notebook';
 	public readonly label = 'Notebook Kernel';
-	readonly supportedLanguages = ['javascript'];
+	readonly supportedLanguages = ['javascript', 'css'];
 
 	private executionOrder = 0;
 	private readonly controller: vscode.NotebookController;
@@ -44,7 +44,6 @@ export class Kernel {
 		execution.start(Date.now());
 
 		try {
-			let displayText: string;
 			const code = await bundleCode(
 				cell.document.getText(),
 				serializer.getMapModuleNameToModule()

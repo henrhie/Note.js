@@ -9,7 +9,7 @@ class Kernel {
     constructor() {
         this.id = 'notebook';
         this.label = 'Notebook Kernel';
-        this.supportedLanguages = ['javascript'];
+        this.supportedLanguages = ['javascript', 'css'];
         this.executionOrder = 0;
         this.controller = vscode.notebooks.createNotebookController(this.id, 'notebook', this.label);
         this.controller.supportedLanguages = this.supportedLanguages;
@@ -29,7 +29,6 @@ class Kernel {
         execution.executionOrder = ++this.executionOrder;
         execution.start(Date.now());
         try {
-            let displayText;
             const code = await build_1.bundleCode(cell.document.getText(), notebook_serializer_1.serializer.getMapModuleNameToModule());
             const outputText = code.outputFiles && code.outputFiles[0].text;
             webview_1.WebViewManager.postMessageToWebiew(outputText);
