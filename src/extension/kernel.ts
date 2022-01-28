@@ -47,11 +47,13 @@ export class Kernel {
 		});
 
 		try {
-			const code = await bundleCode(
+			const buildOutput = await bundleCode(
 				cell.document.getText(),
 				serializer.getMapModuleNameToModule()
 			);
-			const outputText = code.outputFiles && code.outputFiles[0].text;
+
+			const outputText =
+				buildOutput.outputFiles && buildOutput.outputFiles[0].text;
 			WebViewManager.postMessageToWebiew(outputText);
 			WebViewManager.webViewContextOnMessage((message: { output: [] }) => {
 				const consoleLogs = message.output.join('\n');
@@ -60,6 +62,7 @@ export class Kernel {
 						vscode.NotebookCellOutputItem.text(consoleLogs),
 					]),
 				]);
+				buildOutput.outputFiles = [];
 				execution.end(true, Date.now());
 			});
 		} catch (err: any) {

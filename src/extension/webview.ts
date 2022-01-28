@@ -49,6 +49,12 @@ class WebViewManager {
 		);
 	}
 
+	public static setHtmlAsString(htmlContent: string) {
+		if (this.currentPanel) {
+			this.currentPanel._panel.webview.html = htmlContent;
+		}
+	}
+
 	private constructor(panel: vscode.WebviewPanel, extensionUri: vscode.Uri) {
 		this._panel = panel;
 		this._extensionUri = extensionUri;

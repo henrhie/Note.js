@@ -1,5 +1,6 @@
 import * as vscode from 'vscode';
 import { TextEncoder, TextDecoder } from 'util';
+import { WebViewManager } from './webview';
 
 export interface RawNotebookData {
 	cells: RawNotebookCell[];
@@ -30,6 +31,9 @@ class Serializer implements vscode.NotebookSerializer {
 		}
 		let moduleName: RegExpMatchArray | null;
 		const cells = raw.cells.map((item) => {
+			if (item.value.match(/.html$/)) {
+				WebViewManager.setHtmlAsString(item.value);
+			}
 			moduleName =
 				item.value.match(/\/\/.+?\/\//) || item.value.match(/\/\*.+?\//);
 			if (moduleName) {
