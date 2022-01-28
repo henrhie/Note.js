@@ -21,4 +21,6 @@ export function activate(context: vscode.ExtensionContext) {
 	);
 }
 
+vscode.commands.executeCommand('show webview');
+
 export function deactivate() {}
