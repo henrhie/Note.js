@@ -76,6 +76,18 @@ export const loaderPlugin: PluginFactoryType = (entryCellValue, cells) => {
 			build.onLoad(
 				{ filter: /.css$/, namespace: 'unpkg-css' },
 				async (args: esbuild.OnLoadArgs) => {
+					const paths = new URL(args.path).pathname.split('/');
+					const filename = new URL(args.path).pathname.split('/')[
+						paths.length - 1
+					];
+					const cacheData = cache.getModuleData(filename.replace(/.css$/, ''));
+
+					if (cacheData) {
+						return {
+							contents: cacheData,
+							loader: 'jsx',
+						};
+					}
 					const { data, request } = await axios.get<string>(
 						args.path.replace(/.css$/, '')
 					);
@@ -96,7 +108,7 @@ export const loaderPlugin: PluginFactoryType = (entryCellValue, cells) => {
 						contents,
 					};
 
-					cache.setModuleData(data, request.path);
+					cache.setModuleData(contents, request.path);
 					return result;
 				}
 			);
