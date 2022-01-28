@@ -19,6 +19,7 @@ export const bundleCode = async (
 			'process.env.NODE_ENV': '"production"',
 			global: 'window',
 		},
+		incremental: false,
 	});
 
 	return buildResult;
