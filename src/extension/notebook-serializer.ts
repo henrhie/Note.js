@@ -31,7 +31,7 @@ class Serializer implements vscode.NotebookSerializer {
 		}
 		let moduleName: RegExpMatchArray | null;
 		const cells = raw.cells.map((item) => {
-			if (item.value.match(/.html$/)) {
+			if (item.value.match(/^(\/\/)(.html)$/)) {
 				WebViewManager.setHtmlAsString(item.value);
 			}
 			moduleName =
