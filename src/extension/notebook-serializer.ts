@@ -31,7 +31,8 @@ class Serializer implements vscode.NotebookSerializer {
 		}
 		let moduleName: RegExpMatchArray | null;
 		const cells = raw.cells.map((item) => {
-			if (item.value.match(/^(\/\/)(.html)$/)) {
+			let matchHtml = item.value.match(/^(<!--.*)(.*)(\.html.*-->)/);
+			if (matchHtml && matchHtml.length > 1) {
 				WebViewManager.setHtmlAsString(item.value);
 			}
 			moduleName =
@@ -65,6 +66,10 @@ class Serializer implements vscode.NotebookSerializer {
 				value: cell.value,
 				index,
 			});
+			let matchHtml = cell.value.match(/^(<!--.*)(.*)(\.html.*-->)/);
+			if (matchHtml && matchHtml.length > 1) {
+				WebViewManager.setHtmlAsString(cell.value);
+			}
 
 			moduleName =
 				cell.value.match(/\/\/.+?\/\//) || cell.value.match(/\/\*.+?\//);

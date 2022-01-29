@@ -6,7 +6,7 @@ import { WebViewManager } from './webview';
 export class Kernel {
 	readonly id = 'notebook';
 	public readonly label = 'Notebook Kernel';
-	readonly supportedLanguages = ['javascript', 'css'];
+	readonly supportedLanguages = ['javascript', 'css', 'html'];
 
 	private executionOrder = 0;
 	private readonly controller: vscode.NotebookController;

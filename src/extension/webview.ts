@@ -51,7 +51,7 @@ class WebViewManager {
 
 	public static setHtmlAsString(htmlContent: string) {
 		if (this.currentPanel) {
-			this.currentPanel._panel.webview.html = htmlContent;
+			this.currentPanel._panel.webview.html = html(htmlContent);
 		}
 	}
 
@@ -59,7 +59,7 @@ class WebViewManager {
 		this._panel = panel;
 		this._extensionUri = extensionUri;
 
-		this._panel.webview.html = html;
+		WebViewManager.setHtmlAsString(html());
 		this._panel.onDidDispose(() => this.dispose(), null, this._disposables);
 	}
 

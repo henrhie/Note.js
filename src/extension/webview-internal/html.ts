@@ -1,4 +1,4 @@
-export const html = `
+export const html = (htmlContent?: string | undefined) => `
     <!DOCTYPE html>
     <html lang="en">
     <head>
@@ -13,7 +13,7 @@ export const html = `
       </style>
     </head>
     <body>
-     <div id="root"></div> 
+     ${htmlContent}
      <script>
      const vscode = acquireVsCodeApi();
       // General Error Handling Function
