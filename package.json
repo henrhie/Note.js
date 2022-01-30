@@ -1,6 +1,6 @@
 {
-	"name": "jsbook",
-	"displayName": "jsbook",
+	"name": "note.js",
+	"displayName": "note.js",
 	"description": "",
 	"version": "0.0.1",
 	"engines": {
@@ -22,16 +22,6 @@
 				"category": "jsbook"
 			}
 		],
-		"notebookRenderer": [
-			{
-				"id": "notebook-serializer",
-				"entrypoint": "./out/client/index.js",
-				"displayName": "notebook-serializer",
-				"mimeTypes": [
-					"x-application/sample-json-renderer"
-				]
-			}
-		],
 		"notebooks": [
 			{
 				"type": "notebook",
@@ -46,14 +36,11 @@
 	},
 	"scripts": {
 		"vscode:prepublish": "npm run compile && node out/test/checkNoTestProvider.js",
-		"compile": "npm run compile:extension && npm run compile:client",
+		"compile": "npm run compile:extension",
 		"compile:extension": "tsc -b",
-		"compile:client": "webpack --mode production",
 		"lint": "eslint src --ext ts",
-		"watch": "concurrently -r \"npm:watch:*\"",
 		"watch:extension": "tsc -b --watch",
-		"watch:client": "webpack --mode development --watch",
-		"dev": "concurrently -r npm:watch:extension npm:watch:client",
+		"dev": "concurrently -r npm:watch:extension",
 		"pretest": "npm run compile && npm run lint",
 		"test": "node ./out/test/runTest.js"
 	},
