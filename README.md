@@ -16,3 +16,5 @@ Note.js introduces a new paradigm of running javascript code in your favorite ed
     <img src="https://raw.githubusercontent.com/henrhie/jsbook/master/.github/import.png">
   </a>
 </p>
+
+#Documentation
