@@ -23,6 +23,10 @@ Note.js introduces a new paradigm of running javascript code in your favorite ed
 
 # Docs
 
+To get started with Note.js, create a new file and name it with the extension, **_.jsbook_**. This will automatically activate your Note.js extension for you to begin your work.
+<br/>
+Note.js consists of two panels - The notebook panel where you write your code and documentation and a Webview panel which is responsible for displaying your html and executing your javascript code.
+
 ### Javascript
 
 Running Javascript in Note.js is just as simple as click the run button next to a cell. ⚠️⚠️⚠️ Note.js does not run code cumulatively as it is in Jupyter Notebook. The code cell that is run is treated as the entry code and any code in any cell that is needed can be imported. The convention to name cells as javascript modules is:
@@ -77,3 +81,7 @@ Add css code is just as simple as add html and javascript to your prototype. Com
     <img src="https://raw.githubusercontent.com/henrhie/jsbook/master/.github/css-2-doc.png">
   </a>
 </p>
+
+### Markdown
+
+Note.js supports Markdown for you to document your code and share insights with others 🥰.
