@@ -61,3 +61,19 @@ Note.js has first class support for React.js. As in a normal react project, you 
     <img src="https://raw.githubusercontent.com/henrhie/jsbook/master/.github/react-1-doc.png">
   </a>
 </p>
+
+### Css
+
+Add css code is just as simple as add html and javascript to your prototype. Comment out the name of your css cell **_without .css_** and import it into your javascript code.
+
+<p align="center">
+    <img src="https://raw.githubusercontent.com/henrhie/jsbook/master/.github/css-1-doc.png">
+  </a>
+</p>
+
+⚠️⚠️⚠️ Take note that even if you are writing just html and css without javascript code, you need to import your css module into a javascript cell and run that javascript cell for your css to take effect.
+
+<p align="center">
+    <img src="https://raw.githubusercontent.com/henrhie/jsbook/master/.github/css-2-doc.png">
+  </a>
+</p>
