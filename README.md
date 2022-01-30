@@ -5,4 +5,4 @@
   </a>
 </p>
 
-<h4>Think Jupyter for Javascript. Note.js allows you to quickly prototype your frontend projects with a Jupyter-like interface in a seamless fashion.</h4>
+<h4>Think Jupyter notebook 📒 for Javascript. Note.js allows you to quickly prototype your frontend projects with a Jupyter-like interface in a seamless fashion.</h4>
