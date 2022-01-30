@@ -18,15 +18,22 @@ Note.js introduces a new paradigm of running javascript code in your favorite ed
 </p>
 
 # Features
-- 
 
+-
 
 # Docs
 
 ## Javascript
+
 Running Javascript in Note.js is just as simple as click the run button next to a cell. ⚠️⚠️⚠️ Note.js does not run code cumulatively as it is in Jupyter Notebook. The code cell that is run is treated as the entry code and any code in any cell that is needed can be imported. The convention to name cells as javascript modules is:
+
 ```javascript
-  //<module-name>// ⚠️ without .js at the top of the cell
-  
-  //...rest of code
-``` 
+//<module-name>// ⚠️ without .js at the top of the cell
+
+//...rest of code
+```
+
+<p align="center">
+    <img src="https://raw.githubusercontent.com/henrhie/jsbook/master/.github/javascript-1-doc.png">
+  </a>
+</p>
