@@ -37,3 +37,11 @@ Running Javascript in Note.js is just as simple as click the run button next to 
     <img src="https://raw.githubusercontent.com/henrhie/jsbook/master/.github/javascript-1-doc.png">
   </a>
 </p>
+
+You probably might be wondering how you are going to use your favourite npm modules like React and Lodash. Well you don't need to worry about npm or node_modules - Just import them as you would in your javascript project. Under the hood, Note.js uses custom esbuild plugins to fetch source code of npm packages from https://unpkg.com and bundles everything together.
+
+<p align="center">
+    <img src="https://raw.githubusercontent.com/henrhie/jsbook/master/.github/javascript-2-doc.png">
+  </a>
+</p>
+
