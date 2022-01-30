@@ -23,7 +23,7 @@ Note.js introduces a new paradigm of running javascript code in your favorite ed
 
 # Docs
 
-## Javascript
+**Javascript**
 
 Running Javascript in Note.js is just as simple as click the run button next to a cell. ⚠️⚠️⚠️ Note.js does not run code cumulatively as it is in Jupyter Notebook. The code cell that is run is treated as the entry code and any code in any cell that is needed can be imported. The convention to name cells as javascript modules is:
 
@@ -45,3 +45,17 @@ You probably might be wondering how you are going to use your favourite npm modu
   </a>
 </p>
 
+And don't worry about fetching packages on every execution - every package that is fetched is cached in memory.
+
+**Html**
+The default supported language for a cell is javascript. You can change it by clicking the language shown at the button right corner and selecting the prefered language from the pop-up menu. To name an html cell, just comment it out at the top of the cell
+Eg. `html <!-- index.html --> `
+And begin writing your html. Note that you do not need to write any boilerplate html code - just hit the ground running with your ideas.
+
+**React**
+Note.js has first class support for React.js. As in a normal react project, you just need some html and javascript code.
+
+<p align="center">
+    <img src="https://raw.githubusercontent.com/henrhie/jsbook/master/.github/react-1-doc.png">
+  </a>
+</p>
