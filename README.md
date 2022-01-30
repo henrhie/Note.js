@@ -19,7 +19,11 @@ Note.js introduces a new paradigm of running javascript code in your favorite ed
 
 # Features
 
--
+- Note.js under the hood uses Esbuild's blazing fast ⚡⚡⚡ transpiling and bundling capabilities.
+- Use almost all your favourite npm packages on demand.
+- Supports caching of packages so you do not have to refetch packages.
+- First class support for React.js
+- Experiment with Html and Css with Ease
 
 # Docs
 
