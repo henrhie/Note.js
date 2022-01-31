@@ -5,15 +5,14 @@
 </p>
 
 <h4>Think Jupyter notebook 📒 for Javascript. Note.js is a vscode extension that allows you to quickly prototype your frontend projects with a Jupyter-like interface in a seamless fashion.</h4>
-</br>
+<br>
 <p align="center">
     <img src="https://raw.githubusercontent.com/henrhie/jsbook/master/.github/intro-img.png">
   </a>
 </p>
-</br>
+<br>
 Note.js introduces a new paradigm of running javascript code in your favorite editor, vscode. With support for HTML, CSS and Javascript, you can think of each cell as a module which can be imported into other cells like you would do in a traditional javascript project.
-
-</br>
+<br>
 <p align="center">
     <img src="https://raw.githubusercontent.com/henrhie/jsbook/master/.github/import.png">
   </a>
@@ -30,7 +29,7 @@ Note.js introduces a new paradigm of running javascript code in your favorite ed
 # Getting Started
 
 To get started with Note.js, create a new file and name it with the extension, **_.jsbook_**. This will automatically activate your Note.js extension for you to begin your work.
-<br/>
+<br>
 Note.js consists of two panels - The notebook panel where you write your code and documentation and a Webview panel which is responsible for displaying your html and executing your javascript code.
 
 ### Javascript 🔥🔥🔥
