@@ -33,7 +33,7 @@ class WebViewManager {
 		WebViewManager.setHtmlAsString(html());
 	}
 
-	public static revive(panel: vscode.WebviewPanel, extensionUri: vscode.Uri) {
+	public static revive(panel: vscode.WebviewPanel) {
 		WebViewManager.currentPanel = new WebViewManager(panel);
 	}
 
