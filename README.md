@@ -61,7 +61,7 @@ The default supported language for a cell is javascript. You can change it by cl
 Eg. `html <!-- index.html --> `
 And begin writing your html. Note that you do not need to write any boilerplate html code - just hit the ground running with your ideas.
 
-### React 🎉🎉🎉 <img src="https://img.icons8.com/office/28/000000/react.png"/>
+### React 🎉🎉🎉
 
 Note.js has first class support for React.js. As in a normal react project, you just need some html and javascript code.
 
@@ -70,7 +70,7 @@ Note.js has first class support for React.js. As in a normal react project, you 
   </a>
 </p>
 
-### Css 🏆🏆🏆 <img src="https://img.icons8.com/color/28/000000/css3.png"/>
+### Css 🏆🏆🏆
 
 Add css code is just as simple as add html and javascript to your prototype. Comment out the name of your css cell **_without .css_** and import it into your javascript code.
 
@@ -86,6 +86,6 @@ Add css code is just as simple as add html and javascript to your prototype. Com
   </a>
 </p>
 
-### Markdown
+### Markdown 📒📒📒
 
 Note.js supports Markdown for you to document your code and share insights with others 🥰.
