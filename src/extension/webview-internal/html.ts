@@ -1,4 +1,4 @@
-export const html = (htmlContent?: string | undefined) => `
+export const html = (htmlContent: string = '') => `
     <!DOCTYPE html>
     <html lang="en">
     <head>

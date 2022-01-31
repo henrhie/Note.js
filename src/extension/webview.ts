@@ -12,7 +12,7 @@ class WebViewManager {
 	private readonly _panel: vscode.WebviewPanel;
 	private _disposables: vscode.Disposable[] = [];
 
-	public static createOrShow(extensionUri: vscode.Uri) {
+	public static createOrShow() {
 		const column = vscode.window.activeTextEditor
 			? vscode.window.activeTextEditor.viewColumn
 			: undefined;
@@ -30,6 +30,7 @@ class WebViewManager {
 		);
 
 		WebViewManager.currentPanel = new WebViewManager(panel);
+		WebViewManager.setHtmlAsString(html());
 	}
 
 	public static revive(panel: vscode.WebviewPanel, extensionUri: vscode.Uri) {
@@ -56,8 +57,6 @@ class WebViewManager {
 
 	private constructor(panel: vscode.WebviewPanel) {
 		this._panel = panel;
-
-		WebViewManager.setHtmlAsString(html());
 		this._panel.onDidDispose(() => this.dispose(), null, this._disposables);
 	}
 
