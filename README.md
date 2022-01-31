@@ -12,7 +12,8 @@
 </p>
 <br/>
 Note.js introduces a new paradigm of running javascript code in your favorite editor, vscode. With support for HTML, CSS and Javascript, you can think of each cell as a module which can be imported into other cells like you would do in a traditional javascript project.
-<br/>
+
+</br>
 <p align="center">
     <img src="https://raw.githubusercontent.com/henrhie/jsbook/master/.github/import.png">
   </a>
