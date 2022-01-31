@@ -92,7 +92,7 @@ Add css code is just as simple as add html and javascript to your prototype. Com
 Note.js supports Markdown for you to document your code and share insights with others 🥰.
 
 ## Acknowledgement
-Some ideas leading to this project was based on (Stephen Grider's React and Typescript: Build a portfolio course)[https://www.udemy.com/course/react-and-typescript-build-a-portfolio-project/] on Udemy
+Some ideas leading to this project was based on [Stephen Grider's React and Typescript: Build a portfolio course](https://www.udemy.com/course/react-and-typescript-build-a-portfolio-project) on Udemy
 
 ## License
 
