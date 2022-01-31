@@ -16,7 +16,7 @@ export function activate(context: vscode.ExtensionContext) {
 
 	context.subscriptions.push(
 		vscode.commands.registerCommand('show webview', () => {
-			WebViewManager.createOrShow();
+			WebViewManager.createOrShow(context.extensionUri);
 		})
 	);
 }

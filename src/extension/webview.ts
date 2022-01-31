@@ -6,13 +6,14 @@ class WebViewManager {
 	 * Track the currently panel. Only allow a single panel to exist at a time.
 	 */
 	public static currentPanel: WebViewManager | undefined;
+	public extensionURI: vscode.Uri;
 
 	public static readonly viewType = 'webViewManager';
 
 	private readonly _panel: vscode.WebviewPanel;
 	private _disposables: vscode.Disposable[] = [];
 
-	public static createOrShow() {
+	public static createOrShow(extensionUri: vscode.Uri) {
 		const column = vscode.window.activeTextEditor
 			? vscode.window.activeTextEditor.viewColumn
 			: undefined;
@@ -29,12 +30,22 @@ class WebViewManager {
 			{ enableScripts: true }
 		);
 
-		WebViewManager.currentPanel = new WebViewManager(panel);
-		WebViewManager.setHtmlAsString(html());
+		WebViewManager.currentPanel = new WebViewManager(panel, extensionUri);
+		const scriptSrc = vscode.Uri.joinPath(
+			WebViewManager.currentPanel.extensionURI,
+			'webview-internal',
+			'webview-scripts.js'
+		);
+		WebViewManager.setHtmlAsString('', scriptSrc);
 	}
 
-	public static revive(panel: vscode.WebviewPanel) {
-		WebViewManager.currentPanel = new WebViewManager(panel);
+	public static setHtmlWithContent(htmlContent: string) {
+		if (WebViewManager.currentPanel) {
+		}
+	}
+
+	public static revive(panel: vscode.WebviewPanel, extensionUri: vscode.Uri) {
+		WebViewManager.currentPanel = new WebViewManager(panel, extensionUri);
 	}
 
 	public static postMessageToWebiew(message: any) {
@@ -49,15 +60,21 @@ class WebViewManager {
 		);
 	}
 
-	public static setHtmlAsString(htmlContent: string) {
-		if (this.currentPanel) {
-			this.currentPanel._panel.webview.html = html(htmlContent);
+	public static setHtmlAsString(htmlContent: string, scriptSrc: vscode.Uri) {
+		if (WebViewManager.currentPanel) {
+			WebViewManager.currentPanel._panel.webview.html = html(
+				htmlContent,
+				scriptSrc
+			);
 		}
 	}
 
-	private constructor(panel: vscode.WebviewPanel) {
+	// public static setHtmlWithScripts(htmlContent: string)
+
+	private constructor(panel: vscode.WebviewPanel, extensionUri: vscode.Uri) {
 		this._panel = panel;
 		this._panel.onDidDispose(() => this.dispose(), null, this._disposables);
+		this.extensionURI = extensionUri;
 	}
 
 	public dispose() {
