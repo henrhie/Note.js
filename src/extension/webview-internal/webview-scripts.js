@@ -1,14 +1,14 @@
 (function () {
-	const vscode = acquireVsCodeApi();
+	var vscode = acquireVsCodeApi();
 
-	const handleError = (err) => {
-		const root = document.getElementById('root');
+	var handleError = function (err) {
+		var root = document.getElementById('root');
 		root.innerHTML =
 			'<div style="color: red;"><h4>Runtime Error</h4>' + err + '</div>';
 		console.error(err);
 	};
 
-	window.addEventListener('error', (e) => {
+	window.addEventListener('error', function (e) {
 		e.preventDefault();
 		handleError(e.error);
 	});
@@ -21,7 +21,7 @@
 	};
 	window.addEventListener(
 		'message',
-		(event) => {
+		function (event) {
 			try {
 				eval(event.data);
 				vscode.postMessage({

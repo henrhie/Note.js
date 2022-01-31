@@ -10,7 +10,6 @@ class WebViewManager {
 	public static readonly viewType = 'webViewManager';
 
 	private readonly _panel: vscode.WebviewPanel;
-	private readonly _extensionUri: vscode.Uri;
 	private _disposables: vscode.Disposable[] = [];
 
 	public static createOrShow(extensionUri: vscode.Uri) {
@@ -30,11 +29,11 @@ class WebViewManager {
 			{ enableScripts: true }
 		);
 
-		WebViewManager.currentPanel = new WebViewManager(panel, extensionUri);
+		WebViewManager.currentPanel = new WebViewManager(panel);
 	}
 
 	public static revive(panel: vscode.WebviewPanel, extensionUri: vscode.Uri) {
-		WebViewManager.currentPanel = new WebViewManager(panel, extensionUri);
+		WebViewManager.currentPanel = new WebViewManager(panel);
 	}
 
 	public static postMessageToWebiew(message: any) {
@@ -55,9 +54,8 @@ class WebViewManager {
 		}
 	}
 
-	private constructor(panel: vscode.WebviewPanel, extensionUri: vscode.Uri) {
+	private constructor(panel: vscode.WebviewPanel) {
 		this._panel = panel;
-		this._extensionUri = extensionUri;
 
 		WebViewManager.setHtmlAsString(html());
 		this._panel.onDidDispose(() => this.dispose(), null, this._disposables);
