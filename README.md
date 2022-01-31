@@ -22,7 +22,7 @@ Note.js introduces a new paradigm of running javascript code in your favorite ed
 - **Fast code bundling ⚡⚡⚡** - Under the hood, Note.js uses Esbuild, a blazing fast rust based bundler and transpiler to bundle your different local and remote modules together
 - **Use your favourite NPM packages 🛰🛰🛰** - Using custom esbuild plugins, add your favourite npm package to your experiments is just as easy as importing it into your code cell.
 - **Supports caching** - Fetch your npm packages only once per session.
-- **First class support for React.js** - With esbuild's built-in support for JSX transpilation, experimenting with your React ideas has never been better. [Check how to experiment with React ideas in Note.js](###react)
+- **First class support for React.js** - With esbuild's built-in support for JSX transpilation, experimenting with your React ideas has never been better. [Check how to experiment with React ideas in Note.js](#react)
 - Experiment with Html and Css with Ease
 
 # Getting Started
