@@ -2,8 +2,8 @@
 	var vscode = acquireVsCodeApi();
 
 	var handleError = function (err) {
-		var root = document.getElementById('root');
-		root.innerHTML =
+		var body = document.getElementsByTagName('body');
+		body.innerHTML =
 			'<div style="color: red;"><h4>Runtime Error</h4>' + err + '</div>';
 		console.error(err);
 	};

@@ -1,17 +1,37 @@
 import * as vscode from 'vscode';
-import { html } from './webview-internal/html';
+// import { html } from './webview-internal/html';
 
 class WebViewManager {
 	/**
 	 * Track the currently panel. Only allow a single panel to exist at a time.
 	 */
 	public static currentPanel: WebViewManager | undefined;
-	public extensionURI: vscode.Uri;
+	private extensionURI: vscode.Uri;
+	private static webviewRootUri: vscode.Uri;
 
 	public static readonly viewType = 'webViewManager';
 
 	private readonly _panel: vscode.WebviewPanel;
 	private _disposables: vscode.Disposable[] = [];
+
+	private constructor(panel: vscode.WebviewPanel, extensionUri: vscode.Uri) {
+		this._panel = panel;
+		this._panel.onDidDispose(() => this.dispose(), null, this._disposables);
+		this.extensionURI = extensionUri;
+		WebViewManager.webviewRootUri = this._panel.webview.asWebviewUri(
+			vscode.Uri.joinPath(
+				this.extensionURI,
+				'src',
+				'extension',
+				'webview-internal'
+			)
+		);
+		this._panel.webview.html = WebViewManager.webviewHtml(
+			'',
+			this._panel.webview,
+			WebViewManager.webviewRootUri
+		);
+	}
 
 	public static createOrShow(extensionUri: vscode.Uri) {
 		const column = vscode.window.activeTextEditor
@@ -27,21 +47,20 @@ class WebViewManager {
 			WebViewManager.viewType,
 			'View Session',
 			column || vscode.ViewColumn.Two,
-			{ enableScripts: true }
+			{
+				enableScripts: true,
+				localResourceRoots: [
+					vscode.Uri.joinPath(
+						extensionUri,
+						'src',
+						'extension',
+						'webview-internal'
+					),
+				],
+			}
 		);
 
 		WebViewManager.currentPanel = new WebViewManager(panel, extensionUri);
-		const scriptSrc = vscode.Uri.joinPath(
-			WebViewManager.currentPanel.extensionURI,
-			'webview-internal',
-			'webview-scripts.js'
-		);
-		WebViewManager.setHtmlAsString('', scriptSrc);
-	}
-
-	public static setHtmlWithContent(htmlContent: string) {
-		if (WebViewManager.currentPanel) {
-		}
 	}
 
 	public static revive(panel: vscode.WebviewPanel, extensionUri: vscode.Uri) {
@@ -60,21 +79,50 @@ class WebViewManager {
 		);
 	}
 
-	public static setHtmlAsString(htmlContent: string, scriptSrc: vscode.Uri) {
+	private static webviewHtml(
+		htmlContent: string,
+		webview: vscode.Webview,
+		rootResourceUri: vscode.Uri
+	) {
+		if (!WebViewManager.currentPanel) {
+			return '';
+		}
+		const scriptUri = webview.asWebviewUri(
+			vscode.Uri.joinPath(rootResourceUri, 'webview-scripts.js')
+		);
+		return `
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+      <meta charset="UTF-8"/>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+      <style>
+        body {background-color: white;}
+        .vscode-light { color: black }
+        .vscode-dark { color: black }
+        .vscode-high-contrast { color: black }
+      </style>
+    </head>
+    <body>
+     ${htmlContent}
+     <script src="${scriptUri}"></script>
+    </body>
+    </html>
+  `;
+	}
+
+	public static setHtmlAsString(htmlContent: string) {
 		if (WebViewManager.currentPanel) {
-			WebViewManager.currentPanel._panel.webview.html = html(
+			WebViewManager.currentPanel._panel.webview.html = this.webviewHtml(
 				htmlContent,
-				scriptSrc
+				WebViewManager.currentPanel?._panel.webview,
+				WebViewManager.webviewRootUri
 			);
 		}
 	}
 
-	// public static setHtmlWithScripts(htmlContent: string)
-
-	private constructor(panel: vscode.WebviewPanel, extensionUri: vscode.Uri) {
-		this._panel = panel;
-		this._panel.onDidDispose(() => this.dispose(), null, this._disposables);
-		this.extensionURI = extensionUri;
+	public static setHtmlWithContentOnly(htmlContent: string) {
+		WebViewManager.setHtmlAsString(htmlContent);
 	}
 
 	public dispose() {
