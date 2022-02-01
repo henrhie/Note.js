@@ -1,5 +1,4 @@
 import * as vscode from 'vscode';
-// import { html } from './webview-internal/html';
 
 class WebViewManager {
 	/**
@@ -84,9 +83,6 @@ class WebViewManager {
 		webview: vscode.Webview,
 		rootResourceUri: vscode.Uri
 	) {
-		if (!WebViewManager.currentPanel) {
-			return '';
-		}
 		const scriptUri = webview.asWebviewUri(
 			vscode.Uri.joinPath(rootResourceUri, 'webview-scripts.js')
 		);
