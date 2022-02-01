@@ -95,12 +95,18 @@ class WebViewManager {
 			vscode.Uri.joinPath(rootResourceUri, 'webview-styles.css')
 		);
 
+		const nonce = getNonce();
+
 		return `
     <!DOCTYPE html>
     <html lang="en">
     <head>
       <meta charset="UTF-8"/>
       <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+			<meta http-equiv="Content-Security-Policy"
+     		content="img-src ${webview.cspSource} https:; script-src 
+		 		${webview.cspSource} 'unsafe-eval';"
+			/>
       <link href="${styleUri}" rel="stylesheet">
     </head>
     <body>
@@ -136,6 +142,16 @@ class WebViewManager {
 			}
 		}
 	}
+}
+
+function getNonce() {
+	let text = '';
+	const possible =
+		'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+	for (let i = 0; i < 32; i++) {
+		text += possible.charAt(Math.floor(Math.random() * possible.length));
+	}
+	return text;
 }
 
 export { WebViewManager };
