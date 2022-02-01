@@ -19,8 +19,7 @@ export function activate(context: vscode.ExtensionContext) {
 			WebViewManager.createOrShow(context.extensionUri);
 		})
 	);
+	vscode.commands.executeCommand('show webview');
 }
-
-vscode.commands.executeCommand('show webview');
 
 export function deactivate() {}
