@@ -41,7 +41,7 @@
 		"compile:extension": "tsc -b",
 		"lint": "eslint src --ext ts",
 		"watch:extension": "tsc -b --watch",
-		"copy-files": "copyfiles src/extension/webview-internal/** out/extension/webview-internal",
+		"copy-files": "copyfiles -f src/extension/webview-internal/** out/extension/webview-internal",
 		"dev": "concurrently -r npm:watch:extension",
 		"pretest": "npm run compile && npm run lint",
 		"test": "node ./out/test/runTest.js"
