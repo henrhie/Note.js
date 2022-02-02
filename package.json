@@ -3,7 +3,7 @@
 	"displayName": "note.js",
 	"description": "",
 	"version": "0.0.2",
-	"publisher": "Henry Ansah",
+	"publisher": "henryansah",
 	"engines": {
 		"vscode": "^1.57.0"
 	},
