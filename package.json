@@ -2,7 +2,7 @@
 	"name": "notejs",
 	"displayName": "Note.js",
 	"description": "",
-	"version": "0.0.4",
+	"version": "0.0.5",
 	"publisher": "henryansah",
 	"engines": {
 		"vscode": "^1.57.0"
