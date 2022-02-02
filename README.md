@@ -10,7 +10,7 @@
     <img src="https://raw.githubusercontent.com/henrhie/jsbook/master/.github/intro-img.png">
   </a>
 </p>
-<br>
+<br></br>
 Note.js introduces a new paradigm of running javascript code in your favorite editor, vscode. With support for HTML, CSS and Javascript, you can think of each cell as a module which can be imported into other cells like you would do in a traditional javascript project.
 <br>
 <p align="center">
@@ -32,7 +32,7 @@ To get started with Note.js, create a new file and name it with the extension, *
 <br>
 Note.js consists of two panels - The notebook panel where you write your code and documentation and a Webview panel which is responsible for displaying your html and executing your javascript code.
 
-### Javascript
+## Javascript
 
 Running Javascript in Note.js is just as simple as click the run button next to a cell. ⚠️⚠️⚠️ Note.js does not run code cumulatively as it is in Jupyter Notebook. The code cell that is run is treated as the entry code and any code in any cell that is needed can be imported. The convention to name cells as javascript modules is:
 
@@ -62,7 +62,7 @@ The default supported language for a cell is javascript. You can change it by cl
 Eg. `html <!-- index.html --> `
 And begin writing your html. Note that you do not need to write any boilerplate html code - just hit the ground running with your ideas.
 
-## -React
+## React
 
 Note.js has first class support for React.js. As in a normal react project, you just need some html and javascript code.
 
@@ -71,7 +71,7 @@ Note.js has first class support for React.js. As in a normal react project, you 
   </a>
 </p>
 
-## -Css
+## Css
 
 Add css code is just as simple as add html and javascript to your prototype. Comment out the name of your css cell **_without .css_** and import it into your javascript code.
 
@@ -87,7 +87,7 @@ Add css code is just as simple as add html and javascript to your prototype. Com
   </a>
 </p>
 
-## -Markdown 📒
+## Markdown 📒
 
 Note.js supports Markdown for you to document your code and share insights with others 🥰.
 
