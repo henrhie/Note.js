@@ -91,8 +91,6 @@ class WebViewManager {
 			vscode.Uri.joinPath(rootResourceUri, 'webview-styles.css')
 		);
 
-		const nonce = getNonce();
-
 		return `
     <!DOCTYPE html>
     <html lang="en">
@@ -123,10 +121,6 @@ class WebViewManager {
 		}
 	}
 
-	public static setHtmlWithContentOnly(htmlContent: string) {
-		WebViewManager.setHtmlAsString(htmlContent);
-	}
-
 	public dispose() {
 		WebViewManager.currentPanel = undefined;
 		this._panel.dispose();
@@ -138,16 +132,6 @@ class WebViewManager {
 			}
 		}
 	}
-}
-
-function getNonce() {
-	let text = '';
-	const possible =
-		'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-	for (let i = 0; i < 32; i++) {
-		text += possible.charAt(Math.floor(Math.random() * possible.length));
-	}
-	return text;
 }
 
 export { WebViewManager };

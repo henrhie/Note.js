@@ -33,7 +33,7 @@ class Serializer implements vscode.NotebookSerializer {
 		const cells = raw.cells.map((item) => {
 			let matchHtml = item.value.match(/^(<!--.*)(.*)(\.html.*-->)/);
 			if (matchHtml && matchHtml.length > 1) {
-				WebViewManager.setHtmlWithContentOnly(item.value);
+				WebViewManager.setHtmlAsString(item.value);
 			}
 			moduleName =
 				item.value.match(/\/\/.+?\/\//) || item.value.match(/\/\*.+?\//);
@@ -68,7 +68,7 @@ class Serializer implements vscode.NotebookSerializer {
 			});
 			let matchHtml = cell.value.match(/^(<!--.*)(.*)(\.html.*-->)/);
 			if (matchHtml && matchHtml.length > 1) {
-				WebViewManager.setHtmlWithContentOnly(cell.value);
+				WebViewManager.setHtmlAsString(cell.value);
 			}
 
 			moduleName =

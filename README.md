@@ -32,7 +32,7 @@ To get started with Note.js, create a new file and name it with the extension, *
 <br>
 Note.js consists of two panels - The notebook panel where you write your code and documentation and a Webview panel which is responsible for displaying your html and executing your javascript code.
 
-### Javascript 🔥🔥🔥
+### Javascript
 
 Running Javascript in Note.js is just as simple as click the run button next to a cell. ⚠️⚠️⚠️ Note.js does not run code cumulatively as it is in Jupyter Notebook. The code cell that is run is treated as the entry code and any code in any cell that is needed can be imported. The convention to name cells as javascript modules is:
 
@@ -56,13 +56,13 @@ You probably might be wondering how you are going to use your favourite npm modu
 
 And don't worry about fetching packages on every execution - every package that is fetched is cached in memory.
 
-### Html ✨✨✨
+### Html
 
 The default supported language for a cell is javascript. You can change it by clicking the language shown at the button right corner and selecting the prefered language from the pop-up menu. To name an html cell, just comment it out at the top of the cell
 Eg. `html <!-- index.html --> `
 And begin writing your html. Note that you do not need to write any boilerplate html code - just hit the ground running with your ideas.
 
-### React 🎉🎉🎉
+## -React
 
 Note.js has first class support for React.js. As in a normal react project, you just need some html and javascript code.
 
@@ -71,7 +71,7 @@ Note.js has first class support for React.js. As in a normal react project, you 
   </a>
 </p>
 
-### Css 🏆🏆🏆
+## -Css
 
 Add css code is just as simple as add html and javascript to your prototype. Comment out the name of your css cell **_without .css_** and import it into your javascript code.
 
@@ -87,11 +87,12 @@ Add css code is just as simple as add html and javascript to your prototype. Com
   </a>
 </p>
 
-### Markdown 📒📒📒
+## -Markdown 📒
 
 Note.js supports Markdown for you to document your code and share insights with others 🥰.
 
 ## Acknowledgement
+
 Some ideas leading to this project was based on [Stephen Grider's React and Typescript: Build a portfolio course](https://www.udemy.com/course/react-and-typescript-build-a-portfolio-project) on Udemy
 
 ## License
