@@ -20,7 +20,7 @@ class WebViewManager {
 		WebViewManager.webviewRootUri = this._panel.webview.asWebviewUri(
 			vscode.Uri.joinPath(
 				this.extensionURI,
-				'src',
+				'out',
 				'extension',
 				'webview-internal'
 			)
@@ -51,7 +51,7 @@ class WebViewManager {
 				localResourceRoots: [
 					vscode.Uri.joinPath(
 						extensionUri,
-						'src',
+						'out',
 						'extension',
 						'webview-internal'
 					),

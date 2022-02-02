@@ -37,10 +37,11 @@
 	},
 	"scripts": {
 		"vscode:prepublish": "npm run compile && node out/test/checkNoTestProvider.js",
-		"compile": "npm run compile:extension",
+		"compile": "npm run compile:extension && npm run copy-files",
 		"compile:extension": "tsc -b",
 		"lint": "eslint src --ext ts",
 		"watch:extension": "tsc -b --watch",
+		"copy-files": "copyfiles src/extension/webview-internal/** out/extension/webview-internal",
 		"dev": "concurrently -r npm:watch:extension",
 		"pretest": "npm run compile && npm run lint",
 		"test": "node ./out/test/runTest.js"
@@ -55,6 +56,7 @@
 		"@typescript-eslint/eslint-plugin": "^4.26.0",
 		"@typescript-eslint/parser": "^4.26.0",
 		"concurrently": "^5.3.0",
+		"copyfiles": "^2.4.1",
 		"css-loader": "^4.2.0",
 		"eslint": "^7.27.0",
 		"fork-ts-checker-webpack-plugin": "^5.0.14",
