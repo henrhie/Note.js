@@ -2,7 +2,7 @@
 	"name": "notejs",
 	"displayName": "Note.js",
 	"description": "Think Jupyter notebook for browser javascript",
-	"version": "0.0.7",
+	"version": "0.0.8",
 	"publisher": "henryansah",
 	"author": {
 		"name": "Henry Ansah",
