@@ -1,8 +1,36 @@
 {
-	"name": "note.js",
-	"displayName": "note.js",
-	"description": "",
-	"version": "0.0.1",
+	"name": "notejs",
+	"displayName": "Note.js",
+	"description": "Think Jupyter notebook for browser javascript",
+	"version": "0.0.14",
+	"publisher": "henryansah",
+	"author": {
+		"name": "Henry Ansah",
+		"email": "Henryansah083@gmail.com"
+	},
+	"keywords": [
+		"Jupyter",
+		"Notebook",
+		"Browser",
+		"Webview",
+		"Chrome",
+		"React",
+		"Frontend",
+		"Esbuild",
+		"Npm"
+	],
+	"icon": "images/logo.png",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/henrhie/Note.js"
+	},
+	"bugs": {
+		"url": "https://github.com/henrhie/Note.js/issues",
+		"email": "Henryansah083@gmail.com"
+	},
+	"preview": true,
+	"homepage": "https://github.com/henrhie/Note.js/blob/master/README.md",
+	"license": "LICENSE.txt",
 	"engines": {
 		"vscode": "^1.57.0"
 	},
@@ -36,10 +64,11 @@
 	},
 	"scripts": {
 		"vscode:prepublish": "npm run compile && node out/test/checkNoTestProvider.js",
-		"compile": "npm run compile:extension",
+		"compile": "npm run compile:extension && npm run copy-files",
 		"compile:extension": "tsc -b",
 		"lint": "eslint src --ext ts",
 		"watch:extension": "tsc -b --watch",
+		"copy-files": "copyfiles -f src/extension/webview-internal/** out/extension/webview-internal",
 		"dev": "concurrently -r npm:watch:extension",
 		"pretest": "npm run compile && npm run lint",
 		"test": "node ./out/test/runTest.js"
@@ -54,6 +83,7 @@
 		"@typescript-eslint/eslint-plugin": "^4.26.0",
 		"@typescript-eslint/parser": "^4.26.0",
 		"concurrently": "^5.3.0",
+		"copyfiles": "^2.4.1",
 		"css-loader": "^4.2.0",
 		"eslint": "^7.27.0",
 		"fork-ts-checker-webpack-plugin": "^5.0.14",
