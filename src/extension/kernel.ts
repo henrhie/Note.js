@@ -5,7 +5,7 @@ import { WebViewManager } from './webview';
 
 export class Kernel {
 	readonly id = 'notebook';
-	public readonly label = 'Notebook Kernel';
+	public readonly label = 'Browser Javascript Kernel';
 	readonly supportedLanguages = ['javascript', 'css', 'html'];
 
 	private executionOrder = 0;

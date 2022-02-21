@@ -30,27 +30,25 @@ class Cache {
 
 	mapPathToVersionName = (path: string) => {
 		const _data_ = [];
-		const splitData = path.split('');
-		for (let i = 0; i < splitData.length; i++) {
+		for (let i = 0; i < path.length; i++) {
 			if (i === 0) {
 				continue;
 			}
-			if (splitData[i] === '/') {
+			if (path[i] === '/') {
 				break;
 			}
-			_data_.push(splitData[i]);
+			_data_.push(path[i]);
 		}
 		return _data_.join('');
 	};
 
 	mapVersionNameTofilename = (versionName: string) => {
 		const _data_ = [];
-		const splitData = versionName.split('');
-		for (let i = 0; i < splitData.length; i++) {
-			if (splitData[i] === '@') {
+		for (let i = 0; i < versionName.length; i++) {
+			if (versionName[i] === '@') {
 				break;
 			}
-			_data_.push(splitData[i]);
+			_data_.push(versionName[i]);
 		}
 		return _data_.join('');
 	};
