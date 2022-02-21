@@ -7,7 +7,7 @@
 <h4>Think Jupyter notebook 📒 for Javascript. Note.js is a vscode extension that allows you to quickly prototype your frontend projects with a Jupyter-like interface in a seamless fashion.</h4>
 <br>
 <p align="center">
-    <img src="https://raw.githubusercontent.com/henrhie/jsbook/master/.github/intro.gif" height="600" width="600/>
+    <img src="https://raw.githubusercontent.com/henrhie/jsbook/master/.github/intro.gif" height="600" width="800/>
   </a>
 </p>
 <br></br>
