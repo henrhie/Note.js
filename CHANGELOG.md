@@ -1,3 +1,4 @@
-## [Preview]
+## v0.0.16 - preview
 
-- preview release
+- Update vscode engine version
+- Update vscode types version
