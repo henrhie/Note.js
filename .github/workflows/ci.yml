@@ -2,7 +2,7 @@ name: CI
 on:
   push:
     branches:
-      - 'platform-specific-extension'
+      - 'master'
     tags:
       - 'v*'
 
