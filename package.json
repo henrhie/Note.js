@@ -2,7 +2,7 @@
 	"name": "notejs",
 	"displayName": "Note.js",
 	"description": "Think Jupyter notebook for browser javascript",
-	"version": "0.0.19",
+	"version": "0.0.22",
 	"publisher": "henryansah",
 	"author": {
 		"name": "Henry Ansah",
@@ -32,7 +32,7 @@
 	"homepage": "https://github.com/henrhie/Note.js/blob/master/README.md",
 	"license": "LICENSE.txt",
 	"engines": {
-		"vscode": "^1.57.0"
+		"vscode": "^1.64.0"
 	},
 	"categories": [
 		"Other"
@@ -77,7 +77,7 @@
 		"@types/glob": "^7.1.3",
 		"@types/mocha": "^8.2.2",
 		"@types/node": "14.x",
-		"@types/vscode": "^1.57.0",
+		"@types/vscode": "^1.60.0",
 		"@types/vscode-notebook-renderer": "^1.57.8",
 		"@types/webpack-env": "^1.16.0",
 		"@typescript-eslint/eslint-plugin": "^4.26.0",

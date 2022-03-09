@@ -4,6 +4,6 @@ All notable changes to the "notebook-serializer-example" extension will be docum
 
 Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how to structure this file.
 
-## [Unreleased]
+## v0.0.20
 
-- Initial release
+- Extension builds for different platform architectures
