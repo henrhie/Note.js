@@ -21,7 +21,7 @@ Note.js introduces a new paradigm of running javascript code in your favorite ed
 ## Notice⚠⚠⚠
 
 Currently, Note.js is not supported on computers with Apple silicon and others computers with arm based architectures since Github
-CI runners do not support for these architectures. A Temporary workaround is to locate the vscode extensions folder `(~/. vscode/extensions)` on MAC OS, `%USERPROFILE%\. vscode\extensions` on Windows and `~/. vscode/extensions` on Linux, change directory into henryansah.notejs-<version number> folder, delete the node_modules folder and do an npm install.
+CI runners do not have support for these architectures. A Temporary workaround is to locate the vscode extensions folder `(~/. vscode/extensions)` on MAC OS, `%USERPROFILE%\. vscode\extensions` on Windows and `~/. vscode/extensions` on Linux, change directory into henryansah.notejs-<version number> folder, delete the node_modules folder and do an npm install.
 
 The actually reason for this issue is that Note.js needs to be packaged for every OS and architecture separately since esbuild is written with native code and needs to install a platform-specific binary executable.
 
