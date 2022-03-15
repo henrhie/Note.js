@@ -4,6 +4,17 @@
   </a>
 </p>
 
+<br>
+
+## Notice⚠⚠⚠
+
+Currently, Note.js is not supported on computers with Apple silicon and others computers with arm based architectures since Github
+CI runners do not have support for these architectures. A Temporary workaround is to locate the vscode extensions folder `(~/. vscode/extensions)` on MAC OS, `%USERPROFILE%\. vscode\extensions` on Windows and `~/. vscode/extensions` on Linux, change directory into henryansah.notejs-<version number> folder, delete the node_modules folder and do an npm install.
+
+The actually reason for this issue is that Note.js needs to be packaged for every OS and architecture separately since esbuild is written with native code and needs to install a platform-specific binary executable.
+
+<br>
+
 <h4>Think Jupyter notebook 📒 for Javascript. Note.js is a vscode extension that allows you to quickly prototype your frontend projects with a Jupyter-like interface in a seamless fashion.</h4>
 <br>
 <p align="center">
@@ -17,13 +28,6 @@ Note.js introduces a new paradigm of running javascript code in your favorite ed
     <img src="https://raw.githubusercontent.com/henrhie/jsbook/master/.github/import.png">
   </a>
 </p>
-
-## Notice⚠⚠⚠
-
-Currently, Note.js is not supported on computers with Apple silicon and others computers with arm based architectures since Github
-CI runners do not have support for these architectures. A Temporary workaround is to locate the vscode extensions folder `(~/. vscode/extensions)` on MAC OS, `%USERPROFILE%\. vscode\extensions` on Windows and `~/. vscode/extensions` on Linux, change directory into henryansah.notejs-<version number> folder, delete the node_modules folder and do an npm install.
-
-The actually reason for this issue is that Note.js needs to be packaged for every OS and architecture separately since esbuild is written with native code and needs to install a platform-specific binary executable.
 
 # Features
 
@@ -97,6 +101,8 @@ Add css code is just as simple as add html and javascript to your prototype. Com
 ## Markdown 📒
 
 Note.js supports Markdown for you to document your code and share insights with others 🥰.
+
+Should you close you webview whether accidental or intentional, you can bring it back up by opening the command palette and enter the command `show webview`.
 
 ## Acknowledgement
 
